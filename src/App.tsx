@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Col, Row } from "antd";
+import React from "react";
+import styled from "styled-components";
+import "./App.css";
+import { Gateways } from "./components/Gateway/Gateways";
+import { PeripheralList } from "./components/Peripheral/PeripheralList";
+
+const LCol = styled(Col)`
+  background-color: #ebe9e9;
+`;
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Row>
+        <LCol md={12}>
+          <Gateways />
+        </LCol>
+        <Col>
+          <PeripheralList />
+        </Col>
+      </Row>
     </div>
   );
 }
