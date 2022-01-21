@@ -6,7 +6,7 @@ import { GatewayModel } from "../../types/gateway.model";
 import { GatewayCreate } from "./GatewayCreate";
 import { GatewaysList } from "./GatewaysList";
 import { GatewayTopBar } from "./GatewayTopBar";
-import * as S from "./styles";
+import * as S from "../styles";
 
 export interface IGatewayContext {
   fetchGateways?: () => void;
@@ -37,6 +37,7 @@ export const Gateways = () => {
       <GatewayTopBar />
       <GatewaysList gateways={gateways} />
       <S.Modal
+        title={"Add Gateway"}
         maskClosable
         visible={showModal}
         onCancel={() => setShowModal(false)}

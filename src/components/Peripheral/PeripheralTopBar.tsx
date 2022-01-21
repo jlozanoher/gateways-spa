@@ -1,13 +1,13 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import React, { useContext } from "react";
-import { GatewayContext } from "./Gateways";
+import { PeripheralContext } from "../../App";
 import * as S from "../styles";
 
 const { Title } = Typography;
 
-export const GatewayTopBar = () => {
-  const { setShowModal = () => {} } = useContext(GatewayContext);
+export const PeripheralTopBar = () => {
+  const { setShowModal = () => {} } = useContext(PeripheralContext);
 
   const onClick = () => {
     setShowModal(true);
@@ -15,10 +15,10 @@ export const GatewayTopBar = () => {
 
   return (
     <S.Header>
-      <Title level={3}>Gateways</Title>
+      <Title level={3}>Peripherals</Title>
       <S.Grow />
       <Button type="primary" icon={<PlusOutlined />} onClick={onClick}>
-        Add Gateway
+        Add Peripheral
       </Button>
     </S.Header>
   );

@@ -1,7 +1,7 @@
 export type PeripheralStatus = "online" | "offline";
 export enum PeripheralStatusEnum {
   online = "online",
-  reject = "offline",
+  offline = "offline",
 }
 
 export interface PeripheralModel {

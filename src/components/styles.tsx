@@ -14,3 +14,15 @@ export const Grow = styled.div`
 export const Modal = styled(Antd.Modal)`
   padding: 40px 24px;
 `;
+
+export const Box = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+`;
+
+export const Card = styled(Antd.Card)`
+  .ant-card-body {
+    padding: 8px 4px;
+  }
+`;

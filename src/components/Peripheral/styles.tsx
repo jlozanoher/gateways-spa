@@ -9,4 +9,5 @@ export const Card = styled(Antd.Card)`
   .ant-card-body {
     padding: 8px 4px;
   }
+  width: 160px;
 `;

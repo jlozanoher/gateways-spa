@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Gateways SPA built with React.js & Antd
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this readme we use yarn as the package manager but feel free to use npm.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+- Install Node.js (https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
+- Clone the repository or unzip the gateways-spa
+- cd gateways-spa
+- yarn install
+- yarn start
 
-### `yarn start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React.js
+- Antd as the component library
+- TypeScript
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Practical task
 
-### `yarn test`
+### Conditions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You have to prepare a solution to the proposed problem in the defined period of time. The solution must comply with the requirements. For anything not explicitly listed, you are free to choose whatever technology/library/tool you feel comfortable with.
 
-### `yarn build`
+Once ready, you must send a package with the source code of the solution, so it can be built and reviewed by Musala Soft. Instructions how to use the solution must also be provided (resource names, SQL scripts to import test data, other scripts, etc.).
+If you have completed the task after the deadline has expired, you are still encouraged to submit a solution.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Software Requirements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Programming language: JavaScript
+Framework: Node.js/JavaScript + Angular/React or other  
+Database: MongoDB or in-memory
+Automated build: Solution of choice
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Description
 
-### `yarn eject`
+This sample project is managing gateways - master devices that control multiple peripheral devices.
+Your task is to create a REST service (JSON/HTTP) for storing information about these gateways and their associated devices. This information must be stored in the database.
+When storing a gateway, any field marked as “to be validated” must be validated and an error returned if it is invalid. Also, no more that 10 peripheral devices are allowed for a gateway.
+The service must also offer an operation for displaying information about all stored gateways (and their devices) and an operation for displaying details for a single gateway. Finally, it must be possible to add and remove a device from a gateway.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Each gateway has:**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- a unique serial number (string),
+- human-readable name (string),
+- IPv4 address (to be validated),
+- multiple associated peripheral devices.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Each peripheral device has:**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- a UID (number),
+- vendor (string),
+- date created,
+- status - online/offline.
 
-## Learn More
+**Other considerations. Please, provide:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Basic UI - recommended or (providing test data for Postman (or other rest client) if you do not have enough time.
+- Meaningful Unit tests.
+- Readme file with installation guides.
+- An automated build.

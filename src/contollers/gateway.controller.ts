@@ -17,7 +17,7 @@ export const useGatewayCreate = (props: Props) => {
         onSuccess(res.data);
       })
       .catch((err) => {
-        onError(err);
+        onError(err.response.data);
       });
   };
 
@@ -34,7 +34,7 @@ export const useGatewayDelete = (props: Props) => {
         onSuccess(res.data);
       })
       .catch((err) => {
-        onError(err);
+        onError(err.response.data);
       });
   };
 

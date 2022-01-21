@@ -1,28 +1,31 @@
-import { Typography } from "antd";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { ROUTES } from "../../lib/routes";
+import { List } from "antd";
+import React from "react";
 import { PeripheralModel } from "../../types/peripheral.model";
 import { Peripheral } from "./Peripheral";
 
-const { Title } = Typography;
+interface Props {
+  peripherals: PeripheralModel[];
+}
 
-export const PeripheralList = () => {
-  const [peripherals, setPeripherals] = useState<PeripheralModel[]>([]);
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}${ROUTES.peripherals}`)
-      .then((res) => {
-        setPeripherals(res.data);
-      });
-  }, []);
+export const PeripheralList = (props: Props) => {
+  const { peripherals } = props;
   return (
-    <div>
-      <Title level={3}>Peripheral List</Title>
-      {peripherals.map((peripheral) => (
-        <Peripheral key={peripheral._id} peripheral={peripheral} />
-      ))}
-    </div>
+    <List
+      grid={{
+        gutter: 8,
+        xs: 1,
+        sm: 2,
+        md: 4,
+        lg: 4,
+        xl: 6,
+        xxl: 3,
+      }}
+      dataSource={peripherals}
+      renderItem={(peripheral) => (
+        <List.Item>
+          <Peripheral key={peripheral._id} peripheral={peripheral} />
+        </List.Item>
+      )}
+    />
   );
 };
