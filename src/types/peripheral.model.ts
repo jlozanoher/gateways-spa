@@ -10,4 +10,5 @@ export interface PeripheralModel {
   vendor: string;
   status: PeripheralStatus; // online/offline.
   gateway: string;
+  createdAt: string;
 }

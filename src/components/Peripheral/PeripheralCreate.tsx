@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber, Select } from "antd";
+import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
 import React, { useContext } from "react";
 import { PeripheralContext } from "../../App";
 import { usePeripheralCreate } from "../../contollers/peripheral.controller";
@@ -71,6 +71,9 @@ export const PeripheralCreate = () => {
               {PeripheralStatusEnum.offline}
             </Option>
           </Select>
+        </Form.Item>
+        <Form.Item name={"createdAt"} label={"createdAt"}>
+          <DatePicker />
         </Form.Item>
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">

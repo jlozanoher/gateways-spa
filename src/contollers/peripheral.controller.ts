@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios from "axios";
 import { ROUTES } from "../lib/routes";
 import { PeripheralModel } from "../types/peripheral.model";
@@ -38,6 +39,7 @@ export const usePeripheralUpdate = (props: Props) => {
       })
       .catch((err) => {
         onError(err.response.data);
+        err?.response?.data && message.error(err.response.data);
       });
   };
 

@@ -1,5 +1,6 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Col, Row, Typography } from "antd";
+import dayjs from "dayjs";
 import React, { useContext } from "react";
 import { useDrag } from "react-dnd";
 import { PeripheralContext } from "../../App";
@@ -54,6 +55,7 @@ export const Peripheral = (props: Props) => {
               <Text type="secondary">{dotsString(peripheral.gateway)}</Text>
               <Text>{peripheral.status}</Text>
               <Text>{peripheral.vendor}</Text>
+              <Text>{dayjs(peripheral.createdAt).format("YY-MM-DD")}</Text>
             </S.Space>
           </Col>
         </Row>
