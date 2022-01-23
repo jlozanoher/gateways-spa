@@ -1,10 +1,12 @@
 # Gateways SPA built with React.js & Antd
 
-In this readme we use yarn as the package manager but feel free to use npm.
+In this readme yarn is used as the package manager but feel free to use npm.
 
 The automated build procedure is written in .github/workflows folder. This set of actions run in github after every commit.
 
-Once the app is running, just drag and drop the peripherals into the gateways, also, they can be droped back into the peripherals list for detaching. You can create new gateways and peripherals, also update them
+Once the app is running, just drag and drop the peripherals into the gateways, also, they can be droped back into the peripherals list for detaching. You can create new gateways and peripherals, also update them.
+
+If the database is empty, the app will ask you for populating it with test data (this is an optional step).
 
 ## Installation
 

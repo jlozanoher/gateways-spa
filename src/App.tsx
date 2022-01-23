@@ -1,5 +1,4 @@
-import { Col, Row } from "antd";
-import axios from "axios";
+import { Col, Modal, Row } from "antd";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -7,16 +6,24 @@ import styled from "styled-components";
 import "./App.css";
 import { Gateways } from "./components/Gateway/Gateways";
 import { Peripherals } from "./components/Peripheral/Peripherals";
-import { ROUTES } from "./lib/routes";
+import { useGatewayGet } from "./contollers/gateway.controller";
+import { usePeripheralGet } from "./contollers/peripheral.controller";
+import {
+  usePopulate,
+  useShouldPopulate,
+} from "./contollers/populate.controller";
+import { GatewayModel } from "./types/gateway.model";
 import { PeripheralModel } from "./types/peripheral.model";
 
 const LCol = styled(Col)`
   background-color: #ebe9e9;
 `;
 
-export interface IPeripheralContext {
+export interface IAppContext {
   peripherals?: PeripheralModel[];
+  gateways?: GatewayModel[];
   fetchPeripherals?: () => void;
+  fetchGateways?: () => void;
   setShowModal?: Dispatch<SetStateAction<boolean>>;
   showModal?: boolean;
   peripheralForEdition?: PeripheralModel;
@@ -25,34 +32,46 @@ export interface IPeripheralContext {
   >;
 }
 
-export const PeripheralContext = React.createContext<IPeripheralContext>({});
+export const AppContext = React.createContext<IAppContext>({});
 
 function App() {
-  const [peripherals, setPeripherals] = useState<PeripheralModel[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [showPopulateModal, setShowPopulateModal] = useState(true);
   const [peripheralForEdition, setPeripheralForEdition] = useState<
     PeripheralModel | undefined
   >(undefined);
 
-  const fetchPeripherals = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}${ROUTES.peripherals}`)
-      .then((res) => {
-        setPeripherals(res.data);
-      });
-  };
+  const { handlefetchPeripherals, peripherals } = usePeripheralGet({});
+  const { handlefetchGateways, gateways } = useGatewayGet({});
+
+  const { handlePopulate } = usePopulate({
+    onSuccess: () => {
+      setShowPopulateModal(false);
+      handlefetchGateways();
+      handlefetchPeripherals();
+    },
+  });
+  const { handleShouldPopulate, shouldPopuplate } = useShouldPopulate({});
 
   useEffect(() => {
-    fetchPeripherals();
+    handleShouldPopulate();
+    handlefetchPeripherals();
+    handlefetchGateways();
   }, []);
+
+  const handleClosePopulateModal = () => {
+    setShowPopulateModal(false);
+  };
 
   return (
     <div className="App">
       <DndProvider backend={HTML5Backend}>
-        <PeripheralContext.Provider
+        <AppContext.Provider
           value={{
             peripherals,
-            fetchPeripherals,
+            gateways,
+            fetchPeripherals: handlefetchPeripherals,
+            fetchGateways: handlefetchGateways,
             setShowModal,
             showModal,
             peripheralForEdition,
@@ -67,7 +86,19 @@ function App() {
               <Peripherals />
             </Col>
           </Row>
-        </PeripheralContext.Provider>
+        </AppContext.Provider>
+        {
+          <Modal
+            title={"Populate database"}
+            visible={shouldPopuplate === "Yes" && showPopulateModal}
+            onCancel={handleClosePopulateModal}
+            onOk={handlePopulate}
+          >
+            {
+              "The database is emtpy, would you want to populate it with test data?"
+            }
+          </Modal>
+        }
       </DndProvider>
     </div>
   );

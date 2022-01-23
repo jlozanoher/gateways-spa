@@ -1,7 +1,7 @@
 import { Button, Form, Input, InputNumber, Select } from "antd";
 import dayjs from "dayjs";
 import React, { useContext, useEffect } from "react";
-import { PeripheralContext } from "../../App";
+import { AppContext } from "../../App";
 import {
   usePeripheralCreate,
   usePeripheralUpdate,
@@ -30,18 +30,27 @@ interface Props {
 
 export const PeripheralCreate = (props: Props) => {
   const { peripheral, onSave = () => {} } = props;
-  const { fetchPeripherals = () => {} } = useContext(PeripheralContext);
+  const { fetchPeripherals = () => {} } = useContext(AppContext);
 
   const [form] = Form.useForm();
 
   const onError = (err: any) => {
-    if (err?.name?.code === 11000 && err?.name?.keyPattern?.uid)
+    if (err?.name?.code === 11000 && err?.name?.keyPattern?.uid) {
       form.setFields([
         {
           name: "uid",
           errors: ["Duplicity"],
         },
       ]);
+    } else if (err?.name === "ValidationError") {
+      if (err?.params?.path === "body.uid")
+        form.setFields([
+          {
+            name: "uid",
+            errors: [err?.message],
+          },
+        ]);
+    }
   };
 
   useEffect(() => {

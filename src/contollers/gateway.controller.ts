@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { ROUTES } from "../lib/routes";
 import { GatewayModel } from "../types/gateway.model";
 
@@ -6,6 +7,31 @@ interface Props {
   onSuccess: (gateway: GatewayModel) => void;
   onError?: (err: any) => void;
 }
+
+interface PropsGet {
+  onSuccess?: (data: any) => void;
+  onError?: (err: any) => void;
+}
+
+export const useGatewayGet = (props: PropsGet) => {
+  const { onError = () => {}, onSuccess = () => {} } = props;
+
+  const [gateways, setGateways] = useState<GatewayModel[]>([]);
+
+  const handlefetchGateways = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}${ROUTES.gateways}`)
+      .then((res) => {
+        setGateways(res.data);
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onError(err.response.data);
+      });
+  };
+
+  return { handlefetchGateways, gateways };
+};
 
 export const useGatewayCreate = (props: Props) => {
   const { onError = () => {}, onSuccess } = props;

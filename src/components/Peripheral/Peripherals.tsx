@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import React, { useContext } from "react";
 import { useDrop } from "react-dnd";
-import { PeripheralContext } from "../../App";
+import { AppContext } from "../../App";
 import { usePeripheralUpdate } from "../../contollers/peripheral.controller";
 import { ItemTypes } from "../../types/ItemsTypes";
 import * as S from "../styles";
@@ -17,7 +17,7 @@ export const Peripherals = () => {
     fetchPeripherals = () => {},
     setPeripheralForEdition = () => {},
     peripheralForEdition,
-  } = useContext(PeripheralContext);
+  } = useContext(AppContext);
 
   const { handleUpdatePeripheral } = usePeripheralUpdate({
     onSuccess: () => {

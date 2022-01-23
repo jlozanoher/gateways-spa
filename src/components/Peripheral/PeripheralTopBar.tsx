@@ -1,13 +1,13 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import React, { useContext } from "react";
-import { PeripheralContext } from "../../App";
+import { AppContext } from "../../App";
 import * as S from "../styles";
 
 const { Title } = Typography;
 
 export const PeripheralTopBar = () => {
-  const { setShowModal = () => {} } = useContext(PeripheralContext);
+  const { setShowModal = () => {} } = useContext(AppContext);
 
   const onClick = () => {
     setShowModal(true);

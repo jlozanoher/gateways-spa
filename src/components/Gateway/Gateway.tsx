@@ -3,7 +3,7 @@ import { Button, Typography } from "antd";
 import cs from "classnames";
 import React, { useContext } from "react";
 import { useDrop } from "react-dnd";
-import { PeripheralContext } from "../../App";
+import { AppContext } from "../../App";
 import { useGatewayDelete } from "../../contollers/gateway.controller";
 import { usePeripheralUpdate } from "../../contollers/peripheral.controller";
 import { dotsString } from "../../lib/utils";
@@ -22,13 +22,12 @@ interface Props {
 export const Gateway = (props: Props) => {
   const { gateway } = props;
 
-  const {
-    fetchGateways = () => {},
-    setGatewayForEdition = () => {},
-    setShowModal = () => {},
-  } = useContext(GatewayContext);
-  const { peripherals, fetchPeripherals = () => {} } =
-    useContext(PeripheralContext);
+  const { setGatewayForEdition = () => {}, setShowModal = () => {} } =
+    useContext(GatewayContext);
+
+  const { fetchGateways = () => {} } = useContext(AppContext);
+
+  const { peripherals, fetchPeripherals = () => {} } = useContext(AppContext);
 
   const { handleUpdatePeripheral } = usePeripheralUpdate({
     onSuccess: () => {

@@ -1,12 +1,12 @@
 import { Button, Form, Input } from "antd";
 import React, { useContext, useEffect } from "react";
+import { AppContext } from "../../App";
 import {
   useGatewayCreate,
   useGatewayUpdate,
 } from "../../contollers/gateway.controller";
 import { GatewayModel } from "../../types/gateway.model";
 import * as S from "../styles";
-import { GatewayContext } from "./Gateways";
 
 const layout = {
   labelCol: { span: 6 },
@@ -24,7 +24,7 @@ interface Props {
 export const GatewayCreate = (props: Props) => {
   const { gateway, onSave = () => {} } = props;
 
-  const { fetchGateways = () => {} } = useContext(GatewayContext);
+  const { fetchGateways = () => {} } = useContext(AppContext);
 
   const [form] = Form.useForm();
 

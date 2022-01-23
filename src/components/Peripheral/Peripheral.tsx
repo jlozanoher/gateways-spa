@@ -4,7 +4,7 @@ import cs from "classnames";
 import dayjs from "dayjs";
 import React, { useContext } from "react";
 import { useDrag } from "react-dnd";
-import { PeripheralContext } from "../../App";
+import { AppContext } from "../../App";
 import { usePeripheralDelete } from "../../contollers/peripheral.controller";
 import { dotsString } from "../../lib/utils";
 import { ItemTypes } from "../../types/ItemsTypes";
@@ -36,7 +36,7 @@ export const Peripheral = (props: Props) => {
     fetchPeripherals = () => {},
     setPeripheralForEdition = () => {},
     setShowModal = () => {},
-  } = useContext(PeripheralContext);
+  } = useContext(AppContext);
 
   const { handleDeletePeripheral } = usePeripheralDelete({
     onSuccess: () => {

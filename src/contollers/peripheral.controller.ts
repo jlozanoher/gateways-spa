@@ -1,5 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
+import { useState } from "react";
 import { ROUTES } from "../lib/routes";
 import { PeripheralModel } from "../types/peripheral.model";
 
@@ -7,6 +8,31 @@ interface Props {
   onSuccess: (peripheral: PeripheralModel) => void;
   onError?: (err: any) => void;
 }
+
+interface PropsGet {
+  onSuccess?: (data: any) => void;
+  onError?: (err: any) => void;
+}
+
+export const usePeripheralGet = (props: PropsGet) => {
+  const { onError = () => {}, onSuccess = () => {} } = props;
+
+  const [peripherals, setPeripherals] = useState<PeripheralModel[]>([]);
+
+  const handlefetchPeripherals = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}${ROUTES.peripherals}`)
+      .then((res) => {
+        setPeripherals(res.data);
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onError(err.response.data);
+      });
+  };
+
+  return { handlefetchPeripherals, peripherals };
+};
 
 export const usePeripheralCreate = (props: Props) => {
   const { onError = () => {}, onSuccess } = props;

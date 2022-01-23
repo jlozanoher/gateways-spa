@@ -1,7 +1,6 @@
 import { Button } from "antd";
-import axios from "axios";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { ROUTES } from "../../lib/routes";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
+import { AppContext } from "../../App";
 import { GatewayModel } from "../../types/gateway.model";
 import * as S from "../styles";
 import { GatewayCreate } from "./GatewayCreate";
@@ -9,7 +8,6 @@ import { GatewaysList } from "./GatewaysList";
 import { GatewayTopBar } from "./GatewayTopBar";
 
 export interface IGatewayContext {
-  fetchGateways?: () => void;
   setShowModal?: Dispatch<SetStateAction<boolean>>;
   showModal?: boolean;
   gatewayForEditon?: GatewayModel;
@@ -19,23 +17,12 @@ export interface IGatewayContext {
 export const GatewayContext = React.createContext<IGatewayContext>({});
 
 export const Gateways = () => {
-  const [gateways, setGateways] = useState<GatewayModel[]>([]);
   const [gatewayForEditon, setGatewayForEdition] = useState<
     GatewayModel | undefined
   >(undefined);
   const [showModal, setShowModal] = useState(false);
 
-  const fetchGateways = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}${ROUTES.gateways}`)
-      .then((res) => {
-        setGateways(res.data);
-      });
-  };
-
-  useEffect(() => {
-    fetchGateways();
-  }, []);
+  const { gateways = [] } = useContext(AppContext);
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -45,7 +32,6 @@ export const Gateways = () => {
   return (
     <GatewayContext.Provider
       value={{
-        fetchGateways,
         setShowModal,
         showModal,
         gatewayForEditon,
