@@ -41,7 +41,10 @@ export const Peripherals = () => {
   return (
     <div ref={drop} style={{ height: "100%" }}>
       <PeripheralTopBar />
-      <PeripheralList peripherals={unatachedPeripherals} />
+      <S.DivH>
+        <PeripheralList peripherals={unatachedPeripherals} />
+      </S.DivH>
+
       <S.Modal
         title={"Add Peripheral"}
         maskClosable

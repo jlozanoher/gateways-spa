@@ -1,7 +1,12 @@
 import { Button, Form, Input } from "antd";
-import React, { useContext } from "react";
-import { useGatewayCreate } from "../../contollers/gateway.controller";
+import React, { useContext, useEffect } from "react";
+import {
+  useGatewayCreate,
+  useGatewayUpdate,
+} from "../../contollers/gateway.controller";
+import { GatewayModel } from "../../types/gateway.model";
 import { GatewayContext } from "./Gateways";
+import * as S from "../styles";
 
 const layout = {
   labelCol: { span: 6 },
@@ -11,10 +16,30 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-export const GatewayCreate = () => {
+interface Props {
+  gateway?: GatewayModel; // For updating instead of creating
+}
+
+export const GatewayCreate = (props: Props) => {
+  const { gateway } = props;
+
   const { fetchGateways = () => {} } = useContext(GatewayContext);
 
   const { handleCreateGateway } = useGatewayCreate({
+    onSuccess: () => {
+      fetchGateways();
+    },
+    onError: (err) => {
+      if (err?.name?.code === 11000 && err?.name?.keyPattern?.serialNumber)
+        form.setFields([
+          {
+            name: "serialNumber",
+            errors: ["Duplicity"],
+          },
+        ]);
+    },
+  });
+  const { handleUpdateGateway } = useGatewayUpdate({
     onSuccess: () => {
       fetchGateways();
     },
@@ -22,8 +47,22 @@ export const GatewayCreate = () => {
 
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    if (gateway) {
+      form.setFieldsValue(gateway);
+    }
+  }, [gateway]);
+
   const onFinish = (values: any) => {
-    handleCreateGateway(values);
+    if (gateway?._id) {
+      handleUpdateGateway({ ...values, _id: gateway._id });
+    } else {
+      handleCreateGateway(values);
+    }
+  };
+
+  const onClear = () => {
+    form.resetFields();
   };
 
   return (
@@ -61,9 +100,12 @@ export const GatewayCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Create Gateway
-          </Button>
+          <S.Box>
+            <Button type="primary" htmlType="submit">
+              {gateway ? "Update Gateway" : "Create Gateway"}
+            </Button>
+            <Button onClick={onClear}>Clear</Button>
+          </S.Box>
         </Form.Item>
       </Form>
     </div>

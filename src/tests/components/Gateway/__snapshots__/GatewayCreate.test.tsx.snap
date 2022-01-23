@@ -1,0 +1,343 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GatewayCreate should match snaps GatewayCreate 1`] = `
+<div>
+  <form
+    className="ant-form ant-form-horizontal"
+    onReset={[Function]}
+    onSubmit={[Function]}
+  >
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-6 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="name"
+          title="Name"
+        >
+          Name
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-16 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input"
+              id="name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-6 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="serialNumber"
+          title="Serial number"
+        >
+          Serial number
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-16 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input"
+              id="serialNumber"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-6 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="ipv4Address"
+          title="IPv4"
+        >
+          IPv4
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-16 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input"
+              id="ipv4Address"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <div
+              className="sc-hKwDye dbURyo"
+            >
+              <button
+                className="ant-btn ant-btn-primary"
+                onClick={[Function]}
+                type="submit"
+              >
+                <span>
+                  Create Gateway
+                </span>
+              </button>
+              <button
+                className="ant-btn"
+                onClick={[Function]}
+                type="button"
+              >
+                <span>
+                  Clear
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`GatewayCreate should match snaps GatewayCreate in edit mode 1`] = `
+<div>
+  <form
+    className="ant-form ant-form-horizontal"
+    onReset={[Function]}
+    onSubmit={[Function]}
+  >
+    <div
+      className="ant-row ant-form-item ant-form-item-has-success"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-6 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="name"
+          title="Name"
+        >
+          Name
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-16 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input"
+              id="name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              type="text"
+              value="Gate 1"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item ant-form-item-has-success"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-6 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="serialNumber"
+          title="Serial number"
+        >
+          Serial number
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-16 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input"
+              id="serialNumber"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              type="text"
+              value="123"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item ant-form-item-has-success"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-6 ant-form-item-label"
+        style={Object {}}
+      >
+        <label
+          className="ant-form-item-required"
+          htmlFor="ipv4Address"
+          title="IPv4"
+        >
+          IPv4
+        </label>
+      </div>
+      <div
+        className="ant-col ant-col-16 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <input
+              className="ant-input"
+              id="ipv4Address"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              type="text"
+              value="1.1.1.1"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-row ant-form-item"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-16 ant-col-offset-8 ant-form-item-control"
+        style={Object {}}
+      >
+        <div
+          className="ant-form-item-control-input"
+        >
+          <div
+            className="ant-form-item-control-input-content"
+          >
+            <div
+              className="sc-hKwDye dbURyo"
+            >
+              <button
+                className="ant-btn ant-btn-primary"
+                onClick={[Function]}
+                type="submit"
+              >
+                <span>
+                  Update Gateway
+                </span>
+              </button>
+              <button
+                className="ant-btn"
+                onClick={[Function]}
+                type="button"
+              >
+                <span>
+                  Clear
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+`;

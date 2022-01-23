@@ -1,4 +1,6 @@
 import React from "react";
+import * as S from "../styles";
+
 import { GatewayModel } from "../../types/gateway.model";
 import { Gateway } from "./Gateway";
 
@@ -10,10 +12,10 @@ export const GatewaysList = (props: Props) => {
   const { gateways } = props;
 
   return (
-    <div>
+    <S.DivH>
       {gateways.map((gateway) => (
         <Gateway key={gateway._id} gateway={gateway} />
       ))}
-    </div>
+    </S.DivH>
   );
 };

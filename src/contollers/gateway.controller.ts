@@ -24,6 +24,26 @@ export const useGatewayCreate = (props: Props) => {
   return { handleCreateGateway };
 };
 
+export const useGatewayUpdate = (props: Props) => {
+  const { onError = () => {}, onSuccess } = props;
+
+  const handleUpdateGateway = (gateway: GatewayModel) => {
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}${ROUTES.gateways}/${gateway._id}`,
+        gateway
+      )
+      .then((res) => {
+        onSuccess(res.data);
+      })
+      .catch((err) => {
+        onError(err.response.data);
+      });
+  };
+
+  return { handleUpdateGateway };
+};
+
 export const useGatewayDelete = (props: Props) => {
   const { onError = () => {}, onSuccess } = props;
 

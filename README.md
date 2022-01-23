@@ -8,6 +8,7 @@ In this readme we use yarn as the package manager but feel free to use npm.
 - Clone the repository or unzip the gateways-spa
 - cd gateways-spa
 - yarn install
+- yarn test
 - yarn start
 
 ## Technologies

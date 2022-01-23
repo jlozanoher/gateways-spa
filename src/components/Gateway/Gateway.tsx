@@ -1,4 +1,4 @@
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import React, { useContext } from "react";
 import { useDrop } from "react-dnd";
@@ -21,7 +21,11 @@ interface Props {
 export const Gateway = (props: Props) => {
   const { gateway } = props;
 
-  const { fetchGateways = () => {} } = useContext(GatewayContext);
+  const {
+    fetchGateways = () => {},
+    setGatewayForEdition = () => {},
+    setShowModal = () => {},
+  } = useContext(GatewayContext);
   const { peripherals, fetchPeripherals = () => {} } =
     useContext(PeripheralContext);
 
@@ -55,6 +59,11 @@ export const Gateway = (props: Props) => {
     handleDeleteGateway(gateway._id);
   };
 
+  const onEdit = () => {
+    setGatewayForEdition(gateway);
+    setShowModal(true);
+  };
+
   const attachedPeripherals = peripherals?.filter(
     (p) => p.gateway === gateway._id
   );
@@ -63,15 +72,16 @@ export const Gateway = (props: Props) => {
     <div ref={drop}>
       <S.Card>
         <S.Box>
-          <S.Box>
+          <S.BoxC>
             <Button icon={<DeleteOutlined />} danger onClick={onDelete} />
-          </S.Box>
-          <S.Box style={{ flexDirection: "column" }}>
+            <Button icon={<EditOutlined />} onClick={onEdit} />
+          </S.BoxC>
+          <S.BoxC>
             <Title level={5}>{gateway.name}</Title>
             <Text type="secondary">{dotsString(gateway._id)}</Text>
             <div>{gateway.serialNumber}</div>
             <div>{gateway.ipv4Address}</div>
-          </S.Box>
+          </S.BoxC>
           <S.Box style={{ flexDirection: "column", flexGrow: 1 }}>
             <Title level={5}>{"Peripherals"}</Title>
             <PeripheralList peripherals={attachedPeripherals || []} />
