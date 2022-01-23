@@ -5,8 +5,8 @@ import {
   useGatewayUpdate,
 } from "../../contollers/gateway.controller";
 import { GatewayModel } from "../../types/gateway.model";
-import { GatewayContext } from "./Gateways";
 import * as S from "../styles";
+import { GatewayContext } from "./Gateways";
 
 const layout = {
   labelCol: { span: 6 },
@@ -18,34 +18,41 @@ const tailLayout = {
 
 interface Props {
   gateway?: GatewayModel; // For updating instead of creating
+  onSave?: () => void;
 }
 
 export const GatewayCreate = (props: Props) => {
-  const { gateway } = props;
+  const { gateway, onSave = () => {} } = props;
 
   const { fetchGateways = () => {} } = useContext(GatewayContext);
+
+  const [form] = Form.useForm();
+
+  const onError = (err: any) => {
+    if (err?.name?.code === 11000 && err?.name?.keyPattern?.serialNumber)
+      form.setFields([
+        {
+          name: "serialNumber",
+          errors: ["Duplicity"],
+        },
+      ]);
+  };
 
   const { handleCreateGateway } = useGatewayCreate({
     onSuccess: () => {
       fetchGateways();
+      onSave();
     },
-    onError: (err) => {
-      if (err?.name?.code === 11000 && err?.name?.keyPattern?.serialNumber)
-        form.setFields([
-          {
-            name: "serialNumber",
-            errors: ["Duplicity"],
-          },
-        ]);
-    },
+    onError: onError,
   });
+
   const { handleUpdateGateway } = useGatewayUpdate({
     onSuccess: () => {
       fetchGateways();
+      onSave();
     },
+    onError: onError,
   });
-
-  const [form] = Form.useForm();
 
   useEffect(() => {
     if (gateway) {

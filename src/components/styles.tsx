@@ -32,6 +32,13 @@ export const BoxC = styled.div`
 `;
 
 export const Card = styled(Antd.Card)`
+  background: #ffeeee;
+  border-bottom: 1px solid #d7d0d0;
+
+  &.connected {
+    background: #deefce;
+  }
+
   .ant-card-body {
     margin: 0px 8px;
     padding: 8px 4px;

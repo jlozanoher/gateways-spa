@@ -65,7 +65,7 @@ export const Gateways = () => {
           </Button>,
         ]}
       >
-        <GatewayCreate gateway={gatewayForEditon} />
+        <GatewayCreate gateway={gatewayForEditon} onSave={handleModalClose} />
       </S.Modal>
     </GatewayContext.Provider>
   );

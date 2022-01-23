@@ -1,5 +1,6 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
+import cs from "classnames";
 import React, { useContext } from "react";
 import { useDrop } from "react-dnd";
 import { PeripheralContext } from "../../App";
@@ -64,13 +65,14 @@ export const Gateway = (props: Props) => {
     setShowModal(true);
   };
 
-  const attachedPeripherals = peripherals?.filter(
-    (p) => p.gateway === gateway._id
-  );
+  const attachedPeripherals =
+    peripherals?.filter((p) => p.gateway === gateway._id) || [];
+
+  const connected = attachedPeripherals.length;
 
   return (
     <div ref={drop}>
-      <S.Card>
+      <S.Card className={cs({ connected: connected })}>
         <S.Box>
           <S.BoxC>
             <Button icon={<DeleteOutlined />} danger onClick={onDelete} />

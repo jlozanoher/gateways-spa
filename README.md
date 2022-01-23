@@ -2,12 +2,20 @@
 
 In this readme we use yarn as the package manager but feel free to use npm.
 
+The automated build procedure is written in .github/workflows folder. This set of actions run in github after every commit.
+
+Once the app is running, just drag and drop the peripherals into the gateways, also, they can be droped back into the peripherals list for detaching. You can create new gateways and peripherals, also update them
+
 ## Installation
 
 - Install Node.js (https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
 - Clone the repository or unzip the gateways-spa
 - cd gateways-spa
 - yarn install
+- cp .env.example .env
+
+  (Change the api url in the .env file if the node server runs in another ip or port)
+
 - yarn test
 - yarn start
 

@@ -19,6 +19,10 @@ export interface IPeripheralContext {
   fetchPeripherals?: () => void;
   setShowModal?: Dispatch<SetStateAction<boolean>>;
   showModal?: boolean;
+  peripheralForEdition?: PeripheralModel;
+  setPeripheralForEdition?: Dispatch<
+    SetStateAction<PeripheralModel | undefined>
+  >;
 }
 
 export const PeripheralContext = React.createContext<IPeripheralContext>({});
@@ -26,6 +30,9 @@ export const PeripheralContext = React.createContext<IPeripheralContext>({});
 function App() {
   const [peripherals, setPeripherals] = useState<PeripheralModel[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [peripheralForEdition, setPeripheralForEdition] = useState<
+    PeripheralModel | undefined
+  >(undefined);
 
   const fetchPeripherals = () => {
     axios
@@ -43,7 +50,14 @@ function App() {
     <div className="App">
       <DndProvider backend={HTML5Backend}>
         <PeripheralContext.Provider
-          value={{ peripherals, fetchPeripherals, setShowModal, showModal }}
+          value={{
+            peripherals,
+            fetchPeripherals,
+            setShowModal,
+            showModal,
+            peripheralForEdition,
+            setPeripheralForEdition,
+          }}
         >
           <Row gutter={8}>
             <LCol md={12}>

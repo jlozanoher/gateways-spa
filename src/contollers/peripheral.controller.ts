@@ -26,7 +26,7 @@ export const usePeripheralCreate = (props: Props) => {
 };
 
 export const usePeripheralUpdate = (props: Props) => {
-  const { onError = () => {}, onSuccess } = props;
+  const { onError, onSuccess } = props;
 
   const handleUpdatePeripheral = (peripheral: PeripheralModel) => {
     axios
@@ -38,8 +38,9 @@ export const usePeripheralUpdate = (props: Props) => {
         onSuccess(res.data);
       })
       .catch((err) => {
-        onError(err.response.data);
-        err?.response?.data && message.error(err.response.data);
+        onError
+          ? onError(err.response.data)
+          : err?.response?.data && message.error(err.response.data);
       });
   };
 

@@ -1,8 +1,17 @@
-import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
-import React, { useContext } from "react";
+import { Button, Form, Input, InputNumber, Select } from "antd";
+import dayjs from "dayjs";
+import React, { useContext, useEffect } from "react";
 import { PeripheralContext } from "../../App";
-import { usePeripheralCreate } from "../../contollers/peripheral.controller";
-import { PeripheralStatusEnum } from "../../types/peripheral.model";
+import {
+  usePeripheralCreate,
+  usePeripheralUpdate,
+} from "../../contollers/peripheral.controller";
+import {
+  PeripheralModel,
+  PeripheralStatusEnum,
+} from "../../types/peripheral.model";
+import DatePicker from "../DatePicker";
+import * as S from "../styles";
 
 const { Option } = Select;
 
@@ -14,28 +23,62 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-export const PeripheralCreate = () => {
+interface Props {
+  peripheral?: PeripheralModel; // For updating instead of creating
+  onSave?: () => void;
+}
+
+export const PeripheralCreate = (props: Props) => {
+  const { peripheral, onSave = () => {} } = props;
   const { fetchPeripherals = () => {} } = useContext(PeripheralContext);
 
   const [form] = Form.useForm();
 
+  const onError = (err: any) => {
+    if (err?.name?.code === 11000 && err?.name?.keyPattern?.uid)
+      form.setFields([
+        {
+          name: "uid",
+          errors: ["Duplicity"],
+        },
+      ]);
+  };
+
+  useEffect(() => {
+    if (peripheral) {
+      form.setFieldsValue({
+        ...peripheral,
+        createdAt: dayjs(peripheral.createdAt),
+      });
+    }
+  }, [peripheral]);
+
   const { handleCreatePeripheral } = usePeripheralCreate({
     onSuccess: () => {
       fetchPeripherals();
+      onSave();
     },
-    onError: (err) => {
-      if (err?.name?.code === 11000 && err?.name?.keyPattern?.uid)
-        form.setFields([
-          {
-            name: "uid",
-            errors: ["Duplicity"],
-          },
-        ]);
+    onError: onError,
+  });
+
+  const { handleUpdatePeripheral } = usePeripheralUpdate({
+    onSuccess: () => {
+      fetchPeripherals();
+      onSave();
     },
+    onError: onError,
   });
 
   const onFinish = (values: any) => {
-    handleCreatePeripheral(values);
+    if (peripheral?._id) {
+      handleUpdatePeripheral({ ...values, _id: peripheral._id });
+    } else {
+      handleCreatePeripheral(values);
+    }
+  };
+
+  const onClear = () => {
+    form.resetFields();
   };
 
   return (
@@ -59,15 +102,11 @@ export const PeripheralCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item name={"status"} label={"status"}>
-          <Select
-            showSearch
-            placeholder="status"
-            defaultValue={PeripheralStatusEnum.offline}
-          >
-            <Option value={PeripheralStatusEnum.online}>
+          <Select showSearch placeholder="status">
+            <Option value={PeripheralStatusEnum.online} key={1}>
               {PeripheralStatusEnum.online}
             </Option>
-            <Option value={PeripheralStatusEnum.offline}>
+            <Option value={PeripheralStatusEnum.offline} key={2}>
               {PeripheralStatusEnum.offline}
             </Option>
           </Select>
@@ -76,9 +115,12 @@ export const PeripheralCreate = () => {
           <DatePicker />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Create Peripheral
-          </Button>
+          <S.Box>
+            <Button type="primary" htmlType="submit">
+              {peripheral?._id ? "Update Peripheral" : "Create Peripheral"}
+            </Button>
+            <Button onClick={onClear}>Clear</Button>
+          </S.Box>
         </Form.Item>
       </Form>
     </div>

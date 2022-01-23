@@ -15,6 +15,8 @@ export const Peripherals = () => {
     showModal,
     setShowModal = () => {},
     fetchPeripherals = () => {},
+    setPeripheralForEdition = () => {},
+    peripheralForEdition,
   } = useContext(PeripheralContext);
 
   const { handleUpdatePeripheral } = usePeripheralUpdate({
@@ -36,6 +38,11 @@ export const Peripherals = () => {
     []
   );
 
+  const handleCancel = () => {
+    setShowModal(false);
+    setPeripheralForEdition(undefined);
+  };
+
   const unatachedPeripherals = peripherals.filter((p) => !p.gateway);
 
   return (
@@ -46,17 +53,20 @@ export const Peripherals = () => {
       </S.DivH>
 
       <S.Modal
-        title={"Add Peripheral"}
+        title={peripheralForEdition ? "Update Peripheral" : "Create Peripheral"}
         maskClosable
         visible={showModal}
-        onCancel={() => setShowModal(false)}
+        onCancel={handleCancel}
         footer={[
-          <Button type="primary" onClick={() => setShowModal(false)}>
+          <Button type="primary" onClick={handleCancel}>
             Cancel
           </Button>,
         ]}
       >
-        <PeripheralCreate />
+        <PeripheralCreate
+          peripheral={peripheralForEdition}
+          onSave={handleCancel}
+        />
       </S.Modal>
     </div>
   );
